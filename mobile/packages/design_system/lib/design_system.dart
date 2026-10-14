@@ -6,6 +6,7 @@ export 'src/components/in_bubble.dart';
 export 'src/components/in_empty_state.dart';
 export 'src/components/in_field_row.dart';
 export 'src/components/in_highlight.dart';
+export 'src/components/in_logo.dart';
 export 'src/components/in_nav_tile.dart';
 export 'src/components/in_section_label.dart';
 export 'src/components/in_swipe_background.dart';

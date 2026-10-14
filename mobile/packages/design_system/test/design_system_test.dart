@@ -54,4 +54,17 @@ void main() {
     expect((spans.first as TextSpan).text, 'Q4');
     expect((spans.last as TextSpan).text, 'contract');
   });
+
+  testWidgets('the logo paints at the requested size with a label', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      const Directionality(
+        textDirection: TextDirection.ltr,
+        child: Center(child: InLogo(size: 64)),
+      ),
+    );
+    expect(tester.getSize(find.byType(InLogo)), const Size(64, 64));
+    expect(find.bySemanticsLabel('Agentic Inbox'), findsOneWidget);
+  });
 }

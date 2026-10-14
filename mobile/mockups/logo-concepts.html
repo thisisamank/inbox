@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic Inbox Logo Concepts</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --page: #ECEAE6;
+  --card: #FFFFFF;
+  --line: #E3E1DC;
+  --ink: #1A1A19;
+  --ink2: #5C5A55;
+  --ink3: #75726C;
+  --accent: #C2410C;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --page: #111110;
+    --card: #1C1C1B;
+    --line: #33322F;
+    --ink: #F1EFEA;
+    --ink2: #B3B0A8;
+    --ink3: #908D86;
+    --accent: #F97316;
+  }
+}
+:root[data-theme="dark"] {
+  --page: #111110;
+  --card: #1C1C1B;
+  --line: #33322F;
+  --ink: #F1EFEA;
+  --ink2: #B3B0A8;
+  --ink3: #908D86;
+  --accent: #F97316;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); color: var(--ink); font: 15px/1.5 "IBM Plex Sans", system-ui, sans-serif; }
+.page { max-width: 1240px; margin: 0 auto; padding: 40px 16px 80px; }
+h1 { margin: 0 0 6px; font-size: 28px; font-weight: 600; }
+.lede { margin: 0 0 32px; color: var(--ink2); max-width: 72ch; }
+.concept { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 24px; margin-bottom: 24px; display: grid; grid-template-columns: 220px 1fr; gap: 28px; }
+@media (max-width: 760px) { .concept { grid-template-columns: 1fr; } }
+.num { font: 13px "IBM Plex Mono", monospace; color: var(--ink3); }
+.concept h2 { margin: 2px 0 6px; font-size: 20px; font-weight: 600; }
+.concept p { margin: 0 0 8px; color: var(--ink2); font-size: 14px; }
+.hero { width: 220px; height: 220px; border-radius: 48px; overflow: hidden; }
+.hero svg, .tile svg { width: 100%; height: 100%; display: block; }
+.row { display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-end; margin-top: 14px; }
+.cell { display: flex; flex-direction: column; align-items: center; gap: 6px; font: 11px "IBM Plex Mono", monospace; color: var(--ink3); }
+.tile { overflow: hidden; }
+.sq { border-radius: 22.5%; }
+.ci { border-radius: 50%; }
+.s96 { width: 96px; height: 96px; }
+.s60 { width: 60px; height: 60px; }
+.s40 { width: 40px; height: 40px; }
+.s24 { width: 24px; height: 24px; }
+.wall { padding: 14px; border-radius: 14px; display: flex; gap: 14px; }
+.wall.light { background: #F2EEE8; }
+.wall.darkw { background: #0E0E0D; }
+.label { font-size: 12px; color: var(--ink3); margin-top: 4px; }
+.pick { display: inline-block; margin-top: 8px; font: 12px "IBM Plex Mono", monospace; color: var(--accent); }
+.p-a { --bg: #C2410C; --c1: #FFFFFF; --c2: #FDEBDD; --c3: #1A1A19; }
+.p-a.dk { --bg: #1C1C1B; --c1: #F97316; --c2: #FDEBDD; --c3: #F1EFEA; }
+.p-b { --bg: #1A1A19; --c1: #F97316; --c2: #FFFFFF; --c3: #F97316; }
+.p-b.dk { --bg: #0E0E0D; --c1: #F97316; --c2: #FDEBDD; --c3: #F97316; }
+.p-d { --bg: #FDEBDD; --c1: #C2410C; --c2: #6D28D9; --c3: #1A1A19; --c4: #8C8780; }
+.p-d.dk { --bg: #252524; --c1: #F97316; --c2: #B79CFF; --c3: #F1EFEA; --c4: #908D86; }
+.mono { --bg: #E9DFD6 !important; --c1: #4A2E1C !important; --c2: #4A2E1C !important; --c3: #4A2E1C !important; --c4: #4A2E1C !important; }
+.mono.dk { --bg: #3A2A20 !important; --c1: #F4D9C6 !important; --c2: #F4D9C6 !important; --c3: #F4D9C6 !important; --c4: #F4D9C6 !important; }
+.note { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px 24px; color: var(--ink2); font-size: 14px; }
+.note b { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="spark" viewBox="-12 -12 24 24">
+    <path d="M0 -12 C1.5 -4 4 -1.5 12 0 C4 1.5 1.5 4 0 12 C-1.5 4 -4 1.5 -12 0 C-4 -1.5 -1.5 -4 0 -12 Z"/>
+  </symbol>
+
+  <symbol id="c1" viewBox="0 0 100 100">
+    <rect width="100" height="100" style="fill:var(--bg)"/>
+    <rect x="22" y="34" width="54" height="38" rx="7" style="fill:var(--c1)"/>
+    <path d="M24 41 L49 57 L74 41" style="fill:none;stroke:var(--bg);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round"/>
+    <path d="M73 17 C74.7 26 77 28.3 86 30 C77 31.7 74.7 34 73 43 C71.3 34 69 31.7 60 30 C69 28.3 71.3 26 73 17 Z" style="fill:var(--c2);stroke:var(--bg);stroke-width:4;paint-order:stroke"/>
+  </symbol>
+
+  <symbol id="c2" viewBox="0 0 100 100">
+    <rect width="100" height="100" style="fill:var(--bg)"/>
+    <path d="M22 58 L32 41 H68 L78 58 V73 Q78 80 71 80 H29 Q22 80 22 73 Z" style="fill:var(--c1)"/>
+    <path d="M22 58 H37 Q40 58 41 61 Q43.5 67 50 67 Q56.5 67 59 61 Q60 58 63 58 H78" style="fill:none;stroke:var(--bg);stroke-width:4.5;stroke-linejoin:round"/>
+    <path d="M50 16 C51.7 25 54 27.3 63 29 C54 30.7 51.7 33 50 42 C48.3 33 46 30.7 37 29 C46 27.3 48.3 25 50 16 Z" style="fill:var(--c2);stroke:var(--bg);stroke-width:4;paint-order:stroke"/>
+  </symbol>
+
+  <symbol id="c3" viewBox="0 0 100 100">
+    <rect width="100" height="100" style="fill:var(--bg)"/>
+    <path d="M25 52 L50 23 L75 52 Z" style="fill:var(--c2)"/>
+    <path d="M50 33 C50.9 38 52 39.1 57 40 C52 40.9 50.9 42 50 47 C49.1 42 48 40.9 43 40 C48 39.1 49.1 38 50 33 Z" style="fill:var(--bg)"/>
+    <rect x="25" y="50" width="50" height="29" rx="5" style="fill:var(--c1)"/>
+    <path d="M27 53 L50 67 L73 53" style="fill:none;stroke:var(--bg);stroke-width:4;stroke-linecap:round;stroke-linejoin:round"/>
+  </symbol>
+
+  <symbol id="c4" viewBox="0 0 100 100">
+    <rect width="100" height="100" style="fill:var(--bg)"/>
+    <circle cx="27" cy="33" r="5" style="fill:var(--c1)"/>
+    <rect x="36" y="28" width="30" height="10" rx="5" style="fill:var(--c1)"/>
+    <circle cx="27" cy="50" r="5" style="fill:var(--c3)"/>
+    <rect x="36" y="45" width="40" height="10" rx="5" style="fill:var(--c3)"/>
+    <circle cx="27" cy="67" r="5" style="fill:var(--c4)"/>
+    <rect x="36" y="62" width="32" height="10" rx="5" style="fill:var(--c4)"/>
+    <path d="M76 22 C77.4 29.5 79.5 31.6 87 33 C79.5 34.4 77.4 36.5 76 44 C74.6 36.5 72.5 34.4 65 33 C72.5 31.6 74.6 29.5 76 22 Z" style="fill:var(--c2)"/>
+  </symbol>
+
+  <symbol id="c5" viewBox="0 0 100 100">
+    <rect width="100" height="100" style="fill:var(--bg)"/>
+    <path d="M32 22 H68 Q80 22 80 34 V58 Q80 70 68 70 H44 L30 81 L32 70 Q20 70 20 58 V34 Q20 22 32 22 Z" style="fill:var(--c1)"/>
+    <rect x="33" y="35" width="34" height="23" rx="3.5" style="fill:none;stroke:var(--bg);stroke-width:4.5"/>
+    <path d="M34.5 38.5 L50 49 L65.5 38.5" style="fill:none;stroke:var(--bg);stroke-width:4.5;stroke-linecap:round;stroke-linejoin:round"/>
+  </symbol>
+
+  <symbol id="c6" viewBox="0 0 100 100">
+    <rect width="100" height="100" style="fill:var(--bg)"/>
+    <path d="M75 50 A25 25 0 1 0 63 71.5" style="fill:none;stroke:var(--c1);stroke-width:8;stroke-linecap:round"/>
+    <path d="M75 42 V55 Q75 63 82 63" style="fill:none;stroke:var(--c1);stroke-width:8;stroke-linecap:round;stroke-linejoin:round"/>
+    <path d="M50 36 C51.4 44 53.5 46.1 61.5 47.5 C53.5 48.9 51.4 51 50 59 C48.6 51 46.5 48.9 38.5 47.5 C46.5 46.1 48.6 44 50 36 Z" style="fill:var(--c2)"/>
+  </symbol>
+</svg>
+
+<div class="page">
+  <h1>Agentic Inbox, logo concepts</h1>
+  <p class="lede">Six directions for the app icon. Each one shows the large mark, the iOS rounded square, the Android circle, launcher and notification sizes, a dark home screen, and the Android 13 themed (single-color) icon. Pick one by its number, or combine parts, for example "3 with the spark from 1".</p>
+
+  <section class="concept" aria-labelledby="h1c">
+    <div>
+      <div class="hero p-a"><svg role="img" aria-label="Concept 1, spark envelope"><use href="#c1"/></svg></div>
+    </div>
+    <div>
+      <span class="num">01</span>
+      <h2 id="h1c">Spark envelope</h2>
+      <p>A white envelope on clay orange. The four-point spark is the agent, at the corner where a stamp goes. Direct: "mail, with AI".</p>
+      <p><b>Strength:</b> reads at every size. <b>Risk:</b> the most common pairing for AI mail apps.</p>
+      <div class="row">
+        <div class="cell"><div class="tile sq s96 p-a"><svg><use href="#c1"/></svg></div>iOS 96</div>
+        <div class="cell"><div class="tile ci s96 p-a"><svg><use href="#c1"/></svg></div>Android 96</div>
+        <div class="cell"><div class="tile sq s60 p-a"><svg><use href="#c1"/></svg></div>60</div>
+        <div class="cell"><div class="tile sq s40 p-a"><svg><use href="#c1"/></svg></div>40</div>
+        <div class="cell"><div class="tile sq s24 p-a"><svg><use href="#c1"/></svg></div>24</div>
+        <div class="cell"><div class="wall darkw"><div class="tile sq s60 p-a dk"><svg><use href="#c1"/></svg></div></div>dark</div>
+        <div class="cell"><div class="wall light"><div class="tile ci s60 p-a mono"><svg><use href="#c1"/></svg></div><div class="tile ci s60 p-a mono dk"><svg><use href="#c1"/></svg></div></div>themed</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="concept" aria-labelledby="h2c">
+    <div>
+      <div class="hero p-b"><svg role="img" aria-label="Concept 2, agent tray"><use href="#c2"/></svg></div>
+    </div>
+    <div>
+      <span class="num">02</span>
+      <h2 id="h2c">Agent tray</h2>
+      <p>An orange inbox tray on ink, with the spark dropping into it. The tray is the same icon as the Mail tab, so the app icon and the app agree.</p>
+      <p><b>Strength:</b> distinct on a home screen full of white icons. <b>Risk:</b> a dark tile can look heavy in a light theme.</p>
+      <div class="row">
+        <div class="cell"><div class="tile sq s96 p-b"><svg><use href="#c2"/></svg></div>iOS 96</div>
+        <div class="cell"><div class="tile ci s96 p-b"><svg><use href="#c2"/></svg></div>Android 96</div>
+        <div class="cell"><div class="tile sq s60 p-b"><svg><use href="#c2"/></svg></div>60</div>
+        <div class="cell"><div class="tile sq s40 p-b"><svg><use href="#c2"/></svg></div>40</div>
+        <div class="cell"><div class="tile sq s24 p-b"><svg><use href="#c2"/></svg></div>24</div>
+        <div class="cell"><div class="wall darkw"><div class="tile sq s60 p-b dk"><svg><use href="#c2"/></svg></div></div>dark</div>
+        <div class="cell"><div class="wall light"><div class="tile ci s60 p-b mono"><svg><use href="#c2"/></svg></div><div class="tile ci s60 p-b mono dk"><svg><use href="#c2"/></svg></div></div>themed</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="concept" aria-labelledby="h3c">
+    <div>
+      <div class="hero p-a"><svg role="img" aria-label="Concept 3, open envelope A"><use href="#c3"/></svg></div>
+    </div>
+    <div>
+      <span class="num">03</span>
+      <h2 id="h3c">Open envelope "A"</h2>
+      <p>An envelope with its flap open. The flap and the body make an "A" for Agentic, and the spark is cut out of the flap.</p>
+      <p><b>Strength:</b> most ownable; it is a monogram and a mail icon at once. <b>Risk:</b> the cut-out spark disappears at 24 px.</p>
+      <div class="row">
+        <div class="cell"><div class="tile sq s96 p-a"><svg><use href="#c3"/></svg></div>iOS 96</div>
+        <div class="cell"><div class="tile ci s96 p-a"><svg><use href="#c3"/></svg></div>Android 96</div>
+        <div class="cell"><div class="tile sq s60 p-a"><svg><use href="#c3"/></svg></div>60</div>
+        <div class="cell"><div class="tile sq s40 p-a"><svg><use href="#c3"/></svg></div>40</div>
+        <div class="cell"><div class="tile sq s24 p-a"><svg><use href="#c3"/></svg></div>24</div>
+        <div class="cell"><div class="wall darkw"><div class="tile sq s60 p-a dk"><svg><use href="#c3"/></svg></div></div>dark</div>
+        <div class="cell"><div class="wall light"><div class="tile ci s60 p-a mono"><svg><use href="#c3"/></svg></div><div class="tile ci s60 p-a mono dk"><svg><use href="#c3"/></svg></div></div>themed</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="concept" aria-labelledby="h4c">
+    <div>
+      <div class="hero p-d"><svg role="img" aria-label="Concept 4, thread list"><use href="#c4"/></svg></div>
+    </div>
+    <div>
+      <span class="num">04</span>
+      <h2 id="h4c">Thread list</h2>
+      <p>Three inbox rows on cream. The top row is orange, and the purple spark marks it: "the agent picked this one for you". It uses the app's agent color.</p>
+      <p><b>Strength:</b> says "inbox triage" without an envelope. <b>Risk:</b> looks like a to-do or notes app at a glance.</p>
+      <div class="row">
+        <div class="cell"><div class="tile sq s96 p-d"><svg><use href="#c4"/></svg></div>iOS 96</div>
+        <div class="cell"><div class="tile ci s96 p-d"><svg><use href="#c4"/></svg></div>Android 96</div>
+        <div class="cell"><div class="tile sq s60 p-d"><svg><use href="#c4"/></svg></div>60</div>
+        <div class="cell"><div class="tile sq s40 p-d"><svg><use href="#c4"/></svg></div>40</div>
+        <div class="cell"><div class="tile sq s24 p-d"><svg><use href="#c4"/></svg></div>24</div>
+        <div class="cell"><div class="wall darkw"><div class="tile sq s60 p-d dk"><svg><use href="#c4"/></svg></div></div>dark</div>
+        <div class="cell"><div class="wall light"><div class="tile ci s60 p-d mono"><svg><use href="#c4"/></svg></div><div class="tile ci s60 p-d mono dk"><svg><use href="#c4"/></svg></div></div>themed</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="concept" aria-labelledby="h5c">
+    <div>
+      <div class="hero p-a"><svg role="img" aria-label="Concept 5, talk to your inbox"><use href="#c5"/></svg></div>
+    </div>
+    <div>
+      <span class="num">05</span>
+      <h2 id="h5c">Talk to your inbox</h2>
+      <p>A chat bubble with an envelope inside. It puts the agent conversation first: you ask your inbox, it answers.</p>
+      <p><b>Strength:</b> clear story for the agent tab. <b>Risk:</b> close to messaging apps; reads as "chat" more than "mail".</p>
+      <div class="row">
+        <div class="cell"><div class="tile sq s96 p-a"><svg><use href="#c5"/></svg></div>iOS 96</div>
+        <div class="cell"><div class="tile ci s96 p-a"><svg><use href="#c5"/></svg></div>Android 96</div>
+        <div class="cell"><div class="tile sq s60 p-a"><svg><use href="#c5"/></svg></div>60</div>
+        <div class="cell"><div class="tile sq s40 p-a"><svg><use href="#c5"/></svg></div>40</div>
+        <div class="cell"><div class="tile sq s24 p-a"><svg><use href="#c5"/></svg></div>24</div>
+        <div class="cell"><div class="wall darkw"><div class="tile sq s60 p-a dk"><svg><use href="#c5"/></svg></div></div>dark</div>
+        <div class="cell"><div class="wall light"><div class="tile ci s60 p-a mono"><svg><use href="#c5"/></svg></div><div class="tile ci s60 p-a mono dk"><svg><use href="#c5"/></svg></div></div>themed</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="concept" aria-labelledby="h6c">
+    <div>
+      <div class="hero p-a"><svg role="img" aria-label="Concept 6, spark at"><use href="#c6"/></svg></div>
+    </div>
+    <div>
+      <span class="num">06</span>
+      <h2 id="h6c">Spark @</h2>
+      <p>An "@" whose centre is the spark: an address with an agent inside it. The simplest silhouette of the six.</p>
+      <p><b>Strength:</b> bold and very legible at small sizes. <b>Risk:</b> "@" alone is generic; it leans on the spark to feel like this product.</p>
+      <div class="row">
+        <div class="cell"><div class="tile sq s96 p-a"><svg><use href="#c6"/></svg></div>iOS 96</div>
+        <div class="cell"><div class="tile ci s96 p-a"><svg><use href="#c6"/></svg></div>Android 96</div>
+        <div class="cell"><div class="tile sq s60 p-a"><svg><use href="#c6"/></svg></div>60</div>
+        <div class="cell"><div class="tile sq s40 p-a"><svg><use href="#c6"/></svg></div>40</div>
+        <div class="cell"><div class="tile sq s24 p-a"><svg><use href="#c6"/></svg></div>24</div>
+        <div class="cell"><div class="wall darkw"><div class="tile sq s60 p-a dk"><svg><use href="#c6"/></svg></div></div>dark</div>
+        <div class="cell"><div class="wall light"><div class="tile ci s60 p-a mono"><svg><use href="#c6"/></svg></div><div class="tile ci s60 p-a mono dk"><svg><use href="#c6"/></svg></div></div>themed</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="note">
+    <b>My pick: 03, Open envelope "A".</b> It is the only concept that is both a mail icon and a monogram, so it can become the brand mark and not only an app icon. The cut-out spark is too small at 24 px, so the notification icon would use the flap and body only. <b>Runner-up: 01</b>, the safest choice if recognition matters more than distinctness.
+  </div>
+</div>
+</body>
+</html>

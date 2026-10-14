@@ -74,6 +74,8 @@ fvm flutter test                                   (app, core, design_system; ap
 
 All pass, with real output reported, before a task is called complete.
 
+App icons come from the vectors in `app/assets/brand/` (the "Spark envelope" mark). After you change a vector, regenerate every Android and iOS size with `app/tool/generate_icons.sh`; it needs `rsvg-convert` and `magick`. `InLogo` in `design_system` paints the same mark in Flutter, so keep its geometry in step with `icon.svg`.
+
 ## 9. Review gate
 
 The Plannotator review gate in the global agent instructions applies here without change.

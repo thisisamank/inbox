@@ -68,19 +68,18 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     ? CrossAxisAlignment.center
                     : CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: 64,
-                    height: 64,
-                    decoration: BoxDecoration(
-                      color: expired ? c.surface2 : c.accent,
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    child: Icon(
-                      expired ? Icons.lock_outline : Icons.mail_outline,
-                      size: 32,
-                      color: expired ? c.ink2 : c.onAccent,
-                    ),
-                  ),
+                  if (expired)
+                    Container(
+                      width: 64,
+                      height: 64,
+                      decoration: BoxDecoration(
+                        color: c.surface2,
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      child: Icon(Icons.lock_outline, size: 32, color: c.ink2),
+                    )
+                  else
+                    const InLogo(size: 64),
                   const SizedBox(height: InSpace.s9),
                   Text(
                     expired ? 'Your Access session ended' : 'Agentic Inbox',
