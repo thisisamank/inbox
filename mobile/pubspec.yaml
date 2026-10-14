@@ -1,0 +1,12 @@
+name: agentic_inbox_workspace
+description: Dart pub workspace root for the Agentic Inbox app and its internal packages.
+publish_to: none
+
+environment:
+  sdk: ^3.12.0
+
+workspace:
+  - app
+  - packages/api
+  - packages/core
+  - packages/design_system

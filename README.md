@@ -3,6 +3,40 @@
   <p><em>A self-hosted email client with an AI agent, running entirely on Cloudflare Workers</em></p>
 </div>
 
+> **This is a fork of [cloudflare/agentic-inbox](https://github.com/cloudflare/agentic-inbox).**
+> The fork exists for one reason: it adds a native **mobile app** for iOS and Android in [`mobile/`](./mobile).
+> The Worker code is the upstream project. The app works with any stock deployment of it, so you do not need this fork to run your inbox, only to build the app.
+
+## Mobile app
+
+![Agentic Inbox mobile screens](./mobile/mockups/screens.png)
+
+A Flutter app for your Agentic Inbox deployment: threaded mail, folders, search, compose with attachments, and the AI agent, with its drafts that you review before they are sent. The full set of screens is in [`mobile/mockups/index.html`](./mobile/mockups/index.html).
+
+- **Sign-in:** the app uses your existing Cloudflare Access login in the system browser. It needs no changes to the Worker and no shared secret.
+- **Privacy:** the app stores only the Access session token, on the device. Mail stays in your Cloudflare account.
+- **Agent:** the app talks to the same `EmailAgent` Durable Object as the web app, so both clients share one conversation.
+
+### Install (Android)
+
+1. Download the APK from the [latest release](https://github.com/thisisamank/inbox/releases/latest).
+2. Open it on your phone and allow the install.
+3. Enter your inbox URL (for example `agentic-inbox.<you>.workers.dev`) and sign in through Cloudflare Access.
+
+There is no iOS build in the releases. To run the app on an iPhone, build it from source with Xcode.
+
+### Build from source
+
+```bash
+cd mobile
+fvm dart pub get
+cd app && fvm dart run build_runner build
+fvm flutter run
+```
+
+The app layout and its conventions are in [`mobile/AGENTS.md`](./mobile/AGENTS.md).
+
+
 Agentic Inbox lets you send, receive, and manage emails through a modern web interface -- all powered by your own Cloudflare account. Incoming emails arrive via [Cloudflare Email Routing](https://developers.cloudflare.com/email-routing/), each mailbox is isolated in its own [Durable Object](https://developers.cloudflare.com/durable-objects/) with a SQLite database, and attachments are stored in [R2](https://developers.cloudflare.com/r2/).
 
 An **AI-powered Email Agent** can read your inbox, search conversations, and draft replies -- built with the [Cloudflare Agents SDK](https://developers.cloudflare.com/agents/) and [Workers AI](https://developers.cloudflare.com/workers-ai/).

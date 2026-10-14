@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic Inbox Mobile Screens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ECEAE6;
+  --surface: #FFFFFF;
+  --surface-2: #F5F4F1;
+  --line: #E3E1DC;
+  --text: #1A1A19;
+  --text-2: #5C5A55;
+  --text-3: #75726C;
+  --accent: #C2410C;
+  --accent-soft: #FDEBDD;
+  --unread: #1D4ED8;
+  --ok: #15803D;
+  --danger: #B91C1C;
+  --agent: #6D28D9;
+  --agent-soft: #EFE9FB;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111110;
+    --surface: #1C1C1B;
+    --surface-2: #252524;
+    --line: #33322F;
+    --text: #F1EFEA;
+    --text-2: #B3B0A8;
+    --text-3: #908D86;
+    --accent: #F97316;
+    --accent-soft: #3A2414;
+    --unread: #7AA2FF;
+    --ok: #4ADE80;
+    --danger: #F87171;
+    --agent: #B79CFF;
+    --agent-soft: #2A2340;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.4 "IBM Plex Sans", system-ui, sans-serif; }
+.page { max-width: 1760px; margin: 0 auto; padding: 40px 16px 80px; }
+.page > header h1 { margin: 0 0 6px; font-size: 28px; font-weight: 600; }
+.page > header p { margin: 0 0 36px; color: var(--text-2); max-width: 70ch; }
+.grid { display: flex; flex-wrap: wrap; gap: 48px 40px; }
+figure { margin: 0; }
+figcaption { font-size: 13px; color: var(--text-2); margin-bottom: 10px; }
+figcaption b { color: var(--text); font-weight: 600; margin-right: 6px; }
+
+.phone { width: 390px; max-width: calc(100vw - 32px); height: 844px; background: var(--surface); border: 1px solid var(--line); border-radius: 44px; overflow: hidden; display: flex; flex-direction: column; position: relative; box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 12px 32px rgba(0,0,0,.08); }
+.safe-top { height: 44px; flex: none; }
+.safe-bottom { height: 28px; flex: none; }
+
+.appbar { display: flex; align-items: center; gap: 4px; padding: 4px 8px 8px; flex: none; }
+.appbar .title { flex: 1; min-width: 0; padding: 0 4px; }
+.appbar .title strong { display: block; font-size: 20px; font-weight: 600; }
+.appbar .title span { display: block; font: 12px/1.3 "IBM Plex Mono", monospace; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.icon-btn { width: 44px; height: 44px; border: 0; background: none; color: var(--text); border-radius: 22px; display: inline-grid; place-items: center; cursor: pointer; flex: none; }
+.icon-btn:hover { background: var(--surface-2); }
+svg.i { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+svg.i.sm { width: 18px; height: 18px; }
+
+.scroll { flex: 1; overflow: auto; min-height: 0; }
+.tabs { display: flex; border-top: 1px solid var(--line); flex: none; background: var(--surface); }
+.tabs a { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 0 4px; min-height: 52px; font-size: 11px; color: var(--text-3); text-decoration: none; }
+.tabs a.on { color: var(--accent); font-weight: 500; }
+
+.chip-row { display: flex; gap: 8px; padding: 0 16px 10px; overflow-x: auto; flex: none; }
+.chip { border: 1px solid var(--line); background: var(--surface); color: var(--text-2); border-radius: 16px; padding: 6px 12px; font: inherit; font-size: 13px; white-space: nowrap; min-height: 32px; }
+.chip.on { background: var(--text); color: var(--surface); border-color: var(--text); }
+
+.row { display: flex; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line); text-decoration: none; color: inherit; }
+.avatar { width: 40px; height: 40px; border-radius: 20px; flex: none; display: grid; place-items: center; font-weight: 600; font-size: 15px; color: #fff; }
+.row .body { flex: 1; min-width: 0; }
+.row .top { display: flex; align-items: baseline; gap: 8px; }
+.row .from { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row .time { font-size: 12px; color: var(--text-3); flex: none; }
+.row .subj { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 14px; }
+.row .snip { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px; color: var(--text-2); }
+.row.unread .from, .row.unread .subj { font-weight: 600; }
+.row.unread .time { color: var(--unread); font-weight: 500; }
+.count { font: 12px "IBM Plex Mono", monospace; color: var(--text-3); margin-left: 4px; }
+.tag-draft { display: inline-flex; align-items: center; gap: 4px; margin-top: 6px; font-size: 12px; color: var(--agent); background: var(--agent-soft); border-radius: 6px; padding: 2px 8px; }
+
+.fab { position: absolute; right: 16px; bottom: 96px; height: 56px; padding: 0 20px 0 16px; border-radius: 16px; border: 0; background: var(--accent); color: #fff; font: inherit; font-weight: 600; display: flex; align-items: center; gap: 8px; box-shadow: 0 6px 16px rgba(0,0,0,.18); }
+
+.btn { min-height: 48px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--text); font: inherit; font-weight: 500; padding: 0 18px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.danger { color: var(--danger); }
+.btn.block { width: 100%; }
+
+.section-label { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-3); padding: 18px 16px 6px; }
+.field { display: block; padding: 0 16px 14px; }
+.field label { display: block; font-size: 13px; color: var(--text-2); margin-bottom: 6px; }
+.field input, .field textarea, .field select { width: 100%; font: inherit; color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 12px; min-height: 48px; }
+.field textarea { resize: none; }
+.mono { font-family: "IBM Plex Mono", monospace; font-size: 13px; }
+.hint { font-size: 12px; color: var(--text-3); margin-top: 6px; }
+
+.scrim { position: absolute; inset: 0; background: rgba(0,0,0,.35); }
+.drawer { position: absolute; top: 0; bottom: 0; left: 0; width: 300px; background: var(--surface); display: flex; flex-direction: column; border-right: 1px solid var(--line); }
+.nav-item { display: flex; align-items: center; gap: 14px; padding: 0 20px; min-height: 48px; color: var(--text); text-decoration: none; border-radius: 0 24px 24px 0; margin-right: 12px; }
+.nav-item.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.nav-item .n { margin-left: auto; font: 12px "IBM Plex Mono", monospace; color: var(--text-3); }
+.nav-item.on .n { color: var(--accent); }
+
+.msg { border-bottom: 1px solid var(--line); padding: 14px 16px; }
+.msg.collapsed { color: var(--text-2); }
+.msg-head { display: flex; gap: 12px; align-items: center; }
+.msg-head .who { flex: 1; min-width: 0; }
+.msg-head .who b { display: block; font-weight: 600; }
+.msg-head .who span { display: block; font-size: 12px; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.msg-body { padding: 12px 0 0 52px; font-size: 15px; line-height: 1.55; }
+.msg-body p { margin: 0 0 10px; }
+.remote-note { display: flex; align-items: center; gap: 8px; margin: 10px 16px 0; padding: 10px 12px; background: var(--surface-2); border-radius: 10px; font-size: 13px; color: var(--text-2); }
+.remote-note button { margin-left: auto; border: 0; background: none; color: var(--accent); font: inherit; font-weight: 600; min-height: 32px; }
+.attach { display: flex; align-items: center; gap: 10px; margin: 6px 0 0 52px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; font-size: 13px; }
+.attach .meta { flex: 1; min-width: 0; }
+.attach .meta span { display: block; color: var(--text-3); font-size: 12px; }
+.action-bar { display: flex; gap: 8px; padding: 10px 16px; border-top: 1px solid var(--line); flex: none; }
+.action-bar .btn { flex: 1; min-height: 44px; font-size: 14px; }
+
+.draft-card { margin: 14px 16px; border: 1px solid var(--agent); border-radius: 14px; overflow: hidden; }
+.draft-card header { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--agent-soft); color: var(--agent); font-size: 13px; font-weight: 600; }
+.draft-card .txt { padding: 12px; font-size: 14px; line-height: 1.5; }
+.draft-card footer { display: flex; gap: 8px; padding: 0 12px 12px; }
+.draft-card footer .btn { min-height: 40px; font-size: 13px; flex: 1; }
+
+.compose-row { display: flex; align-items: center; gap: 10px; padding: 0 16px; min-height: 52px; border-bottom: 1px solid var(--line); }
+.compose-row .k { width: 52px; color: var(--text-3); font-size: 14px; flex: none; }
+.compose-row .v { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.pill { display: inline-flex; align-items: center; gap: 6px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px; padding: 3px 10px; font-size: 13px; }
+.compose-body { padding: 16px; font-size: 15px; line-height: 1.6; color: var(--text); }
+.compose-body .quote { margin-top: 18px; padding-left: 12px; border-left: 2px solid var(--line); color: var(--text-3); font-size: 13px; }
+.keyboard-bar { display: flex; gap: 4px; padding: 6px 8px; border-top: 1px solid var(--line); flex: none; }
+
+.search-box { display: flex; align-items: center; gap: 8px; margin: 0 16px 10px; padding: 0 12px; min-height: 48px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; }
+.search-box input { flex: 1; min-width: 0; border: 0; background: none; font: inherit; color: var(--text); outline: none; }
+.op { font: 12px "IBM Plex Mono", monospace; border: 1px dashed var(--line); background: none; color: var(--text-2); border-radius: 8px; padding: 6px 10px; min-height: 32px; }
+mark { background: var(--accent-soft); color: inherit; border-radius: 3px; padding: 0 2px; }
+
+.bubble { max-width: 82%; padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.5; margin: 0 16px 10px; }
+.bubble.me { margin-left: auto; background: var(--text); color: var(--surface); border-bottom-right-radius: 4px; }
+.bubble.ai { background: var(--surface-2); border-bottom-left-radius: 4px; }
+.tool { display: flex; align-items: center; gap: 8px; margin: 0 16px 8px; font: 12px "IBM Plex Mono", monospace; color: var(--text-3); }
+.tool .dot { width: 8px; height: 8px; border-radius: 4px; background: var(--ok); }
+.composer { display: flex; align-items: flex-end; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--line); flex: none; }
+.composer textarea { flex: 1; font: inherit; color: var(--text); background: var(--surface-2); border: 1px solid var(--line); border-radius: 22px; padding: 11px 16px; resize: none; min-height: 44px; }
+.send { width: 44px; height: 44px; border-radius: 22px; border: 0; background: var(--agent); color: #fff; display: grid; place-items: center; flex: none; }
+
+.list-item { display: flex; align-items: center; gap: 14px; padding: 0 16px; min-height: 56px; border-bottom: 1px solid var(--line); color: var(--text); text-decoration: none; }
+.list-item .t { flex: 1; min-width: 0; }
+.list-item .t b { display: block; font-weight: 500; }
+.list-item .t span { display: block; font-size: 12px; color: var(--text-3); }
+.switch { width: 46px; height: 28px; border-radius: 14px; background: var(--accent); position: relative; flex: none; border: 0; }
+.switch::after { content: ""; position: absolute; top: 3px; right: 3px; width: 22px; height: 22px; border-radius: 11px; background: #fff; }
+.switch.off { background: var(--line); }
+.switch.off::after { right: auto; left: 3px; }
+
+.center { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 28px; gap: 16px; }
+.mark { width: 64px; height: 64px; border-radius: 18px; background: var(--accent); color: #fff; display: grid; place-items: center; }
+.center h2 { margin: 8px 0 0; font-size: 28px; font-weight: 600; line-height: 1.15; }
+.center p { margin: 0; color: var(--text-2); }
+
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--surface); border-radius: 20px 20px 0 0; padding: 8px 0 28px; border-top: 1px solid var(--line); }
+.grabber { width: 36px; height: 5px; border-radius: 3px; background: var(--line); margin: 0 auto 12px; }
+.lock { background: linear-gradient(#2B2A28, #1A1918); color: #F1EFEA; }
+.lock .clock { text-align: center; font-size: 72px; font-weight: 300; margin-top: 40px; line-height: 1; }
+.lock .date { text-align: center; color: #C9C6BF; margin-top: 6px; }
+.notif { margin: 32px 12px 0; background: rgba(255,255,255,.12); border-radius: 18px; padding: 12px 14px; display: flex; gap: 12px; }
+.notif .mark { width: 38px; height: 38px; border-radius: 10px; }
+.notif .app { font-size: 12px; color: #C9C6BF; display: flex; justify-content: space-between; }
+.notif b { display: block; font-weight: 600; margin-top: 2px; }
+.notif .s { font-size: 14px; color: #E5E2DB; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="back" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></symbol>
+  <symbol id="close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="m13 7 4 4"/></symbol>
+  <symbol id="spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+  <symbol id="inbox" viewBox="0 0 24 24"><path d="M3 13h5l1.5 3h5L16 13h5"/><path d="M5 5h14l2 8v6H3v-6z"/></symbol>
+  <symbol id="send" viewBox="0 0 24 24"><path d="M4 12 20 4l-6 16-3-7z"/></symbol>
+  <symbol id="file" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/></symbol>
+  <symbol id="archive" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="5" rx="1"/><path d="M5 9v11h14V9M10 13h4"/></symbol>
+  <symbol id="trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
+  <symbol id="spam" viewBox="0 0 24 24"><path d="M12 3 3 20h18z"/><path d="M12 10v4M12 17v.5"/></symbol>
+  <symbol id="folder" viewBox="0 0 24 24"><path d="M3 6h6l2 2h10v11H3z"/></symbol>
+  <symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></symbol>
+  <symbol id="mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+  <symbol id="reply" viewBox="0 0 24 24"><path d="M10 8 4 13l6 5"/><path d="M4 13h10a6 6 0 0 1 6 6"/></symbol>
+  <symbol id="forward" viewBox="0 0 24 24"><path d="m14 8 6 5-6 5"/><path d="M20 13H10a6 6 0 0 0-6 6"/></symbol>
+  <symbol id="more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+  <symbol id="clip" viewBox="0 0 24 24"><path d="M20 11 12 19a5 5 0 0 1-7-7l8-8a3.5 3.5 0 0 1 5 5l-8 8a2 2 0 0 1-3-3l7-7"/></symbol>
+  <symbol id="image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 17-5-5-9 8"/></symbol>
+  <symbol id="lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></symbol>
+  <symbol id="chev" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="star" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol>
+  <symbol id="logout" viewBox="0 0 24 24"><path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h10"/></symbol>
+  <symbol id="refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></symbol>
+</svg>
+
+<div class="page">
+<header>
+  <h1>Agentic Inbox, mobile screens</h1>
+  <p>Static mockups for review. Each frame is 390 × 844 (iPhone 14/15). The data in the frames is sample data. Number your feedback by screen.</p>
+</header>
+
+<div class="grid">
+
+<!-- 1 Login -->
+<figure>
+<figcaption><b>01</b>Login through Cloudflare Access</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div class="center">
+    <div class="mark"><svg class="i" style="width:32px;height:32px" aria-hidden="true"><use href="#mail"/></svg></div>
+    <h2>Agentic Inbox</h2>
+    <p>Your email, on your Cloudflare account. Sign in with the same Access login you use on the web.</p>
+    <div class="field" style="padding:8px 0 0">
+      <label for="u1">Inbox URL</label>
+      <input id="u1" class="mono" value="agentic-inbox.thisisamank.workers.dev">
+      <div class="hint">Saved after the first sign-in.</div>
+    </div>
+    <button class="btn primary block"><svg class="i sm" aria-hidden="true"><use href="#lock"/></svg>Sign in with Cloudflare Access</button>
+  </div>
+  <p style="text-align:center;font-size:12px;color:var(--text-3);margin:0 24px 16px">Access opens in a secure browser window. The app stores only the session cookie.</p>
+  <div class="safe-bottom"></div>
+</div>
+</figure>
+
+<!-- 2 Mailbox picker -->
+<figure>
+<figcaption><b>02</b>Mailbox picker</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div class="appbar">
+    <div class="title"><strong>Mailboxes</strong><span>agentic-inbox.thisisamank.workers.dev</span></div>
+    <button class="icon-btn" aria-label="Settings"><svg class="i" aria-hidden="true"><use href="#gear"/></svg></button>
+  </div>
+  <div class="scroll">
+    <a class="list-item" href="#s3">
+      <div class="avatar" style="background:#C2410C">A</div>
+      <div class="t"><b>aman@akxr.in</b><span>12 unread · 3 drafts from the agent</span></div>
+      <svg class="i sm" aria-hidden="true" style="color:var(--text-3)"><use href="#chev"/></svg>
+    </a>
+    <a class="list-item" href="#s3">
+      <div class="avatar" style="background:#1D4ED8">G</div>
+      <div class="t"><b>gupta@akxr.in</b><span>2 unread</span></div>
+      <svg class="i sm" aria-hidden="true" style="color:var(--text-3)"><use href="#chev"/></svg>
+    </a>
+    <div style="padding:20px 16px">
+      <button class="btn block"><svg class="i sm" aria-hidden="true"><use href="#plus"/></svg>New mailbox</button>
+    </div>
+  </div>
+  <div class="safe-bottom"></div>
+</div>
+</figure>
+
+<!-- 3 Inbox -->
+<figure id="s3">
+<figcaption><b>03</b>Inbox (threaded)</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div class="appbar">
+    <button class="icon-btn" aria-label="Folders"><svg class="i" aria-hidden="true"><use href="#menu"/></svg></button>
+    <div class="title"><strong>Inbox</strong><span>aman@akxr.in</span></div>
+    <button class="icon-btn" aria-label="Switch mailbox"><svg class="i" aria-hidden="true"><use href="#down"/></svg></button>
+  </div>
+  <div class="chip-row">
+    <button class="chip on">All</button><button class="chip">Unread</button><button class="chip">Has draft</button><button class="chip">Attachments</button>
+  </div>
+  <div class="scroll">
+    <a class="row unread" href="#s5">
+      <div class="avatar" style="background:#0F766E">P</div>
+      <div class="body">
+        <div class="top"><span class="from">Priya Raman <span class="count">3</span></span><span class="time">9:41</span></div>
+        <div class="subj">Re: Q4 vendor contract</div>
+        <div class="snip">Thanks Aman. Legal signed off on clause 7, can we close by Friday?</div>
+        <span class="tag-draft"><svg class="i sm" aria-hidden="true" style="width:14px;height:14px"><use href="#spark"/></svg>Draft ready</span>
+      </div>
+    </a>
+    <a class="row unread" href="#s5">
+      <div class="avatar" style="background:#7C3AED">G</div>
+      <div class="body">
+        <div class="top"><span class="from">GitHub</span><span class="time">8:15</span></div>
+        <div class="subj">[cloudflare/agentic-inbox] PR #12 merged</div>
+        <div class="snip">thomasgauvin merged 3 commits into main</div>
+      </div>
+    </a>
+    <a class="row" href="#s5">
+      <div class="avatar" style="background:#B45309">R</div>
+      <div class="body">
+        <div class="top"><span class="from">Rohan, Neha <span class="count">5</span></span><span class="time">Mon</span></div>
+        <div class="subj">Offsite dates</div>
+        <div class="snip">Works for me. I'll book the venue for the 24th.</div>
+      </div>
+    </a>
+    <a class="row" href="#s5">
+      <div class="avatar" style="background:#475569">S</div>
+      <div class="body">
+        <div class="top"><span class="from">Stripe</span><span class="time">Sun</span></div>
+        <div class="subj">Your payout is on the way</div>
+        <div class="snip">A payout to your account ending 4021 was initiated.</div>
+      </div>
+    </a>
+    <a class="row" href="#s5">
+      <div class="avatar" style="background:#BE185D">M</div>
+      <div class="body">
+        <div class="top"><span class="from">Meera Shah</span><span class="time">Oct 9</span></div>
+        <div class="subj">Intro: Aman ↔ Kabir</div>
+        <div class="snip">Kabir runs infra at a fintech in Bengaluru, thought you two should talk.</div>
+        <span class="tag-draft"><svg class="i sm" aria-hidden="true" style="width:14px;height:14px"><use href="#spark"/></svg>Draft ready</span>
+      </div>
+    </a>
+    <a class="row" href="#s5">
+      <div class="avatar" style="background:#15803D">C</div>
+      <div class="body">
+        <div class="top"><span class="from">Cloudflare</span><span class="time">Oct 8</span></div>
+        <div class="subj">Your monthly Workers usage</div>
+        <div class="snip">Here is a summary of usage for your account.</div>
+      </div>
+    </a>
+  </div>
+  <button class="fab"><svg class="i" aria-hidden="true"><use href="#pen"/></svg>Compose</button>
+  <nav class="tabs">
+    <a class="on" href="#s3"><svg class="i" aria-hidden="true"><use href="#inbox"/></svg>Mail</a>
+    <a href="#s7"><svg class="i" aria-hidden="true"><use href="#search"/></svg>Search</a>
+    <a href="#s8"><svg class="i" aria-hidden="true"><use href="#spark"/></svg>Agent</a>
+    <a href="#s9"><svg class="i" aria-hidden="true"><use href="#gear"/></svg>Settings</a>
+  </nav>
+  <div class="safe-bottom" style="height:20px"></div>
+</div>
+</figure>
+
+<!-- 4 Drawer -->
+<figure>
+<figcaption><b>04</b>Folder drawer</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div style="flex:1;opacity:.5"></div>
+  <div class="scrim"></div>
+  <nav class="drawer" aria-label="Folders">
+    <div class="safe-top"></div>
+    <div style="padding:4px 20px 16px">
+      <div style="font-size:20px;font-weight:600">aman@akxr.in</div>
+      <button class="chip" style="margin-top:8px">Switch mailbox</button>
+    </div>
+    <a class="nav-item on" href="#s3"><svg class="i" aria-hidden="true"><use href="#inbox"/></svg>Inbox<span class="n">12</span></a>
+    <a class="nav-item" href="#s3"><svg class="i" aria-hidden="true"><use href="#file"/></svg>Drafts<span class="n">3</span></a>
+    <a class="nav-item" href="#s3"><svg class="i" aria-hidden="true"><use href="#send"/></svg>Sent</a>
+    <a class="nav-item" href="#s3"><svg class="i" aria-hidden="true"><use href="#archive"/></svg>Archive</a>
+    <a class="nav-item" href="#s3"><svg class="i" aria-hidden="true"><use href="#spam"/></svg>Spam<span class="n">1</span></a>
+    <a class="nav-item" href="#s3"><svg class="i" aria-hidden="true"><use href="#trash"/></svg>Trash</a>
+    <div class="section-label" style="padding-left:20px">Folders</div>
+    <a class="nav-item" href="#s3"><svg class="i" aria-hidden="true"><use href="#folder"/></svg>Invoices</a>
+    <a class="nav-item" href="#s3"><svg class="i" aria-hidden="true"><use href="#folder"/></svg>Hiring</a>
+    <a class="nav-item" href="#s3" style="color:var(--text-2)"><svg class="i" aria-hidden="true"><use href="#plus"/></svg>New folder</a>
+  </nav>
+  <div class="safe-bottom"></div>
+</div>
+</figure>
+
+<!-- 5 Thread -->
+<figure id="s5">
+<figcaption><b>05</b>Thread with agent draft</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div class="appbar">
+    <button class="icon-btn" aria-label="Back"><svg class="i" aria-hidden="true"><use href="#back"/></svg></button>
+    <div class="title"></div>
+    <button class="icon-btn" aria-label="Archive"><svg class="i" aria-hidden="true"><use href="#archive"/></svg></button>
+    <button class="icon-btn" aria-label="Delete"><svg class="i" aria-hidden="true"><use href="#trash"/></svg></button>
+    <button class="icon-btn" aria-label="Mark unread"><svg class="i" aria-hidden="true"><use href="#mail"/></svg></button>
+    <button class="icon-btn" aria-label="More"><svg class="i" aria-hidden="true"><use href="#more"/></svg></button>
+  </div>
+  <div class="scroll">
+    <h2 style="margin:0;padding:4px 16px 12px;font-size:22px;font-weight:600;line-height:1.25">Re: Q4 vendor contract</h2>
+    <div class="msg collapsed">
+      <div class="msg-head">
+        <div class="avatar" style="background:#C2410C">A</div>
+        <div class="who"><b>Aman Kumar</b><span>Sent the redlined draft, two open points on clause 7…</span></div>
+        <span class="time" style="font-size:12px">Oct 10</span>
+      </div>
+    </div>
+    <div class="msg">
+      <div class="msg-head">
+        <div class="avatar" style="background:#0F766E">P</div>
+        <div class="who"><b>Priya Raman</b><span>to aman@akxr.in</span></div>
+        <span class="time" style="font-size:12px">9:41</span>
+      </div>
+      <div class="remote-note"><svg class="i sm" aria-hidden="true"><use href="#image"/></svg>Remote images blocked<button>Load</button></div>
+      <div class="msg-body">
+        <p>Thanks Aman. Legal signed off on clause 7 with your wording.</p>
+        <p>Can we close this by Friday? I've attached the final PDF.</p>
+        <p>Priya</p>
+      </div>
+      <div class="attach">
+        <svg class="i" aria-hidden="true" style="color:var(--danger)"><use href="#file"/></svg>
+        <div class="meta">Vendor-Agreement-Q4-final.pdf<span>412 KB</span></div>
+        <button class="icon-btn" aria-label="Download"><svg class="i sm" aria-hidden="true"><use href="#down"/></svg></button>
+      </div>
+    </div>
+    <section class="draft-card" aria-label="Agent draft">
+      <header><svg class="i sm" aria-hidden="true"><use href="#spark"/></svg>Agent draft · not sent</header>
+      <div class="txt">Hi Priya, great news on clause 7. Friday works. I'll sign the PDF tonight and send it back first thing tomorrow.</div>
+      <footer>
+        <button class="btn">Discard</button>
+        <button class="btn">Edit</button>
+        <button class="btn primary">Review &amp; send</button>
+      </footer>
+    </section>
+  </div>
+  <div class="action-bar">
+    <button class="btn"><svg class="i sm" aria-hidden="true"><use href="#reply"/></svg>Reply</button>
+    <button class="btn"><svg class="i sm" aria-hidden="true"><use href="#forward"/></svg>Forward</button>
+  </div>
+  <div class="safe-bottom" style="height:20px"></div>
+</div>
+</figure>
+
+<!-- 6 Compose -->
+<figure id="s6">
+<figcaption><b>06</b>Compose / reply</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div class="appbar">
+    <button class="icon-btn" aria-label="Close"><svg class="i" aria-hidden="true"><use href="#close"/></svg></button>
+    <div class="title"><strong style="font-size:17px">Reply</strong></div>
+    <button class="icon-btn" aria-label="Attach file"><svg class="i" aria-hidden="true"><use href="#clip"/></svg></button>
+    <button class="btn primary" style="min-height:40px;padding:0 16px;margin-left:4px"><svg class="i sm" aria-hidden="true"><use href="#send"/></svg>Send</button>
+  </div>
+  <div class="compose-row"><span class="k">From</span><div class="v"><span class="mono">aman@akxr.in</span></div><svg class="i sm" aria-hidden="true" style="color:var(--text-3)"><use href="#down"/></svg></div>
+  <div class="compose-row"><span class="k">To</span><div class="v"><span class="pill">Priya Raman <svg class="i sm" aria-hidden="true" style="width:14px;height:14px"><use href="#close"/></svg></span></div><button class="chip" style="min-height:28px;padding:2px 8px">Cc/Bcc</button></div>
+  <div class="compose-row"><span class="k">Subject</span><div class="v">Re: Q4 vendor contract</div></div>
+  <div class="scroll">
+    <div class="compose-body">
+      Hi Priya, great news on clause 7. Friday works. I'll sign the PDF tonight and send it back first thing tomorrow.<br><br>Aman
+      <div class="attach" style="margin:16px 0 0"><svg class="i" aria-hidden="true" style="color:var(--danger)"><use href="#file"/></svg><div class="meta">Vendor-Agreement-Q4-signed.pdf<span>420 KB</span></div><button class="icon-btn" aria-label="Remove attachment"><svg class="i sm" aria-hidden="true"><use href="#close"/></svg></button></div>
+      <div class="quote">On Oct 13, Priya Raman wrote:<br>Thanks Aman. Legal signed off on clause 7…</div>
+    </div>
+  </div>
+  <div class="keyboard-bar">
+    <button class="chip" style="display:flex;align-items:center;gap:6px;color:var(--agent);border-color:var(--agent)"><svg class="i sm" aria-hidden="true"><use href="#spark"/></svg>Rewrite with agent</button>
+    <span style="flex:1"></span>
+    <span style="font-size:12px;color:var(--text-3);align-self:center">Draft saved</span>
+  </div>
+  <div class="safe-bottom" style="height:20px"></div>
+</div>
+</figure>
+
+<!-- 7 Search -->
+<figure id="s7">
+<figcaption><b>07</b>Search</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div class="appbar"><div class="title"><strong>Search</strong><span>aman@akxr.in</span></div></div>
+  <label class="search-box">
+    <svg class="i sm" aria-hidden="true" style="color:var(--text-3)"><use href="#search"/></svg>
+    <input aria-label="Search mail" class="mono" value="from:priya contract">
+    <button class="icon-btn" aria-label="Clear" style="width:32px;height:32px"><svg class="i sm" aria-hidden="true"><use href="#close"/></svg></button>
+  </label>
+  <div class="chip-row">
+    <button class="op">from:</button><button class="op">to:</button><button class="op">subject:</button><button class="op">has:attachment</button><button class="op">in:sent</button>
+  </div>
+  <div class="section-label">2 results</div>
+  <div class="scroll">
+    <a class="row" href="#s5">
+      <div class="avatar" style="background:#0F766E">P</div>
+      <div class="body">
+        <div class="top"><span class="from">Priya Raman</span><span class="time">9:41</span></div>
+        <div class="subj">Re: Q4 vendor <mark>contract</mark></div>
+        <div class="snip">Legal signed off on clause 7 with your wording.</div>
+      </div>
+    </a>
+    <a class="row" href="#s5">
+      <div class="avatar" style="background:#0F766E">P</div>
+      <div class="body">
+        <div class="top"><span class="from">Priya Raman</span><span class="time">Oct 2</span></div>
+        <div class="subj">Q4 vendor <mark>contract</mark>, first draft</div>
+        <div class="snip">Sharing the first draft for your review.</div>
+      </div>
+    </a>
+  </div>
+  <nav class="tabs">
+    <a href="#s3"><svg class="i" aria-hidden="true"><use href="#inbox"/></svg>Mail</a>
+    <a class="on" href="#s7"><svg class="i" aria-hidden="true"><use href="#search"/></svg>Search</a>
+    <a href="#s8"><svg class="i" aria-hidden="true"><use href="#spark"/></svg>Agent</a>
+    <a href="#s9"><svg class="i" aria-hidden="true"><use href="#gear"/></svg>Settings</a>
+  </nav>
+  <div class="safe-bottom" style="height:20px"></div>
+</div>
+</figure>
+
+<!-- 8 Agent -->
+<figure id="s8">
+<figcaption><b>08</b>Agent chat</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div class="appbar">
+    <div class="title"><strong>Agent</strong><span>aman@akxr.in · kimi-k2.5</span></div>
+    <button class="icon-btn" aria-label="Clear chat"><svg class="i" aria-hidden="true"><use href="#refresh"/></svg></button>
+  </div>
+  <div class="scroll" style="padding-top:8px">
+    <div class="bubble me">What needs my attention today?</div>
+    <div class="tool"><span class="dot"></span>list_emails · folder=inbox · 12 results</div>
+    <div class="tool"><span class="dot"></span>get_thread · Re: Q4 vendor contract</div>
+    <div class="bubble ai">Two things. Priya wants to close the vendor contract by Friday, and I drafted a yes. Meera introduced you to Kabir, and I drafted a short reply that suggests a call next week. The rest is notifications.</div>
+    <div class="bubble me">Make the Kabir reply suggest Thursday 4pm.</div>
+    <div class="tool"><span class="dot"></span>draft_reply · Intro: Aman ↔ Kabir</div>
+    <section class="draft-card" aria-label="Updated draft" style="margin-top:4px">
+      <header><svg class="i sm" aria-hidden="true"><use href="#spark"/></svg>Draft updated · Intro: Aman ↔ Kabir</header>
+      <div class="txt">Thanks Meera. Kabir, good to meet you. Does Thursday at 4pm IST work for a quick call?</div>
+      <footer><button class="btn">Open thread</button><button class="btn primary">Review &amp; send</button></footer>
+    </section>
+  </div>
+  <div class="chip-row" style="padding-top:8px">
+    <button class="chip">Summarize unread</button><button class="chip">Draft replies for today</button><button class="chip">Find invoices</button>
+  </div>
+  <div class="composer">
+    <textarea rows="1" aria-label="Message the agent" placeholder="Ask about this inbox…"></textarea>
+    <button class="send" aria-label="Send"><svg class="i sm" aria-hidden="true"><use href="#send"/></svg></button>
+  </div>
+  <nav class="tabs">
+    <a href="#s3"><svg class="i" aria-hidden="true"><use href="#inbox"/></svg>Mail</a>
+    <a href="#s7"><svg class="i" aria-hidden="true"><use href="#search"/></svg>Search</a>
+    <a class="on" href="#s8"><svg class="i" aria-hidden="true"><use href="#spark"/></svg>Agent</a>
+    <a href="#s9"><svg class="i" aria-hidden="true"><use href="#gear"/></svg>Settings</a>
+  </nav>
+  <div class="safe-bottom" style="height:20px"></div>
+</div>
+</figure>
+
+<!-- 9 Settings -->
+<figure id="s9">
+<figcaption><b>09</b>Settings</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div class="appbar"><div class="title"><strong>Settings</strong><span>aman@akxr.in</span></div></div>
+  <div class="scroll">
+    <div class="section-label">Agent</div>
+    <div class="list-item"><div class="t"><b>Auto-draft new mail</b><span>The agent drafts a reply. It never sends.</span></div><button class="switch" aria-label="Auto-draft new mail" aria-pressed="true"></button></div>
+    <a class="list-item" href="#s9"><div class="t"><b>System prompt</b><span>Custom · 1,240 characters</span></div><svg class="i sm" aria-hidden="true" style="color:var(--text-3)"><use href="#chev"/></svg></a>
+    <div class="section-label">Notifications</div>
+    <div class="list-item"><div class="t"><b>New mail</b><span>Sender and subject only</span></div><button class="switch" aria-label="New mail notifications" aria-pressed="true"></button></div>
+    <div class="list-item"><div class="t"><b>Draft ready</b><span>When the agent finishes a draft</span></div><button class="switch off" aria-label="Draft ready notifications" aria-pressed="false"></button></div>
+    <div class="section-label">Mailbox</div>
+    <a class="list-item" href="#s9"><div class="t"><b>Display name</b><span>Aman Kumar</span></div><svg class="i sm" aria-hidden="true" style="color:var(--text-3)"><use href="#chev"/></svg></a>
+    <a class="list-item" href="#s9"><div class="t"><b>Signature</b><span>Aman</span></div><svg class="i sm" aria-hidden="true" style="color:var(--text-3)"><use href="#chev"/></svg></a>
+    <div class="section-label">Account</div>
+    <div class="list-item"><div class="t"><b>Signed in through Access</b><span class="mono">thisisamank.cloudflareaccess.com · 27 days left</span></div></div>
+    <div style="padding:16px;display:flex;flex-direction:column;gap:10px">
+      <button class="btn block"><svg class="i sm" aria-hidden="true"><use href="#logout"/></svg>Sign out</button>
+      <button class="btn block danger"><svg class="i sm" aria-hidden="true"><use href="#trash"/></svg>Delete this mailbox</button>
+    </div>
+  </div>
+  <nav class="tabs">
+    <a href="#s3"><svg class="i" aria-hidden="true"><use href="#inbox"/></svg>Mail</a>
+    <a href="#s7"><svg class="i" aria-hidden="true"><use href="#search"/></svg>Search</a>
+    <a href="#s8"><svg class="i" aria-hidden="true"><use href="#spark"/></svg>Agent</a>
+    <a class="on" href="#s9"><svg class="i" aria-hidden="true"><use href="#gear"/></svg>Settings</a>
+  </nav>
+  <div class="safe-bottom" style="height:20px"></div>
+</div>
+</figure>
+
+<!-- 10 System prompt -->
+<figure>
+<figcaption><b>10</b>Edit system prompt</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div class="appbar">
+    <button class="icon-btn" aria-label="Back"><svg class="i" aria-hidden="true"><use href="#back"/></svg></button>
+    <div class="title"><strong style="font-size:17px">System prompt</strong></div>
+    <button class="btn primary" style="min-height:40px;padding:0 16px">Save</button>
+  </div>
+  <div class="scroll">
+    <div class="field" style="padding-top:8px">
+      <label for="sp">Instructions for the agent in this mailbox</label>
+      <textarea id="sp" rows="18" class="mono">You are an email assistant for Aman. Write short, direct replies in plain text. Never repeat what the thread already says.
+
+For vendor and legal mail, keep a formal tone and do not agree to dates without checking the calendar note in the thread.
+
+For intros, suggest a call and offer two time slots in IST.</textarea>
+      <div class="hint">The agent only drafts. You review every draft before it is sent.</div>
+    </div>
+    <div style="padding:0 16px"><button class="btn block">Reset to default prompt</button></div>
+  </div>
+  <div class="safe-bottom"></div>
+</div>
+</figure>
+
+<!-- 11 New mailbox -->
+<figure>
+<figcaption><b>11</b>New mailbox (sheet)</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div style="flex:1"></div>
+  <div class="scrim"></div>
+  <div class="sheet" role="dialog" aria-label="New mailbox">
+    <div class="grabber"></div>
+    <h2 style="margin:0;padding:0 16px 16px;font-size:20px;font-weight:600">New mailbox</h2>
+    <div class="field">
+      <label for="nm">Address</label>
+      <div style="display:flex;gap:8px">
+        <input id="nm" class="mono" value="hello" style="flex:1">
+        <select aria-label="Domain" class="mono" style="width:auto;flex:none">
+          <option>@akxr.in</option><option>@thisisamank.in</option><option>@useref.dev</option>
+        </select>
+      </div>
+      <div class="hint">Mail for this address reaches the app through the catch-all rule.</div>
+    </div>
+    <div class="field">
+      <label for="dn">Display name</label>
+      <input id="dn" value="Aman Kumar">
+    </div>
+    <div style="padding:4px 16px 0;display:flex;gap:10px">
+      <button class="btn" style="flex:1">Cancel</button>
+      <button class="btn primary" style="flex:1">Create</button>
+    </div>
+  </div>
+</div>
+</figure>
+
+<!-- 12 Swipe actions -->
+<figure>
+<figcaption><b>12</b>Swipe actions and move sheet</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div class="appbar">
+    <button class="icon-btn" aria-label="Folders"><svg class="i" aria-hidden="true"><use href="#menu"/></svg></button>
+    <div class="title"><strong>Inbox</strong><span>aman@akxr.in</span></div>
+  </div>
+  <div style="position:relative;border-bottom:1px solid var(--line)">
+    <div style="position:absolute;inset:0;background:var(--ok);color:#fff;display:flex;align-items:center;padding-left:20px;gap:8px;font-weight:600"><svg class="i" aria-hidden="true"><use href="#archive"/></svg>Archive</div>
+    <div class="row" style="position:relative;background:var(--surface);transform:translateX(120px);border:0">
+      <div class="avatar" style="background:#475569">S</div>
+      <div class="body"><div class="top"><span class="from">Stripe</span><span class="time">Sun</span></div><div class="subj">Your payout is on the way</div></div>
+    </div>
+  </div>
+  <div style="position:relative;border-bottom:1px solid var(--line)">
+    <div style="position:absolute;inset:0;background:var(--danger);color:#fff;display:flex;align-items:center;justify-content:flex-end;padding-right:20px;gap:8px;font-weight:600">Delete<svg class="i" aria-hidden="true"><use href="#trash"/></svg></div>
+    <div class="row" style="position:relative;background:var(--surface);transform:translateX(-110px);border:0">
+      <div class="avatar" style="background:#15803D">C</div>
+      <div class="body"><div class="top"><span class="from">Cloudflare</span><span class="time">Oct 8</span></div><div class="subj">Your monthly Workers usage</div></div>
+    </div>
+  </div>
+  <div style="flex:1"></div>
+  <div class="scrim"></div>
+  <div class="sheet" role="dialog" aria-label="Move to">
+    <div class="grabber"></div>
+    <h2 style="margin:0;padding:0 16px 8px;font-size:18px;font-weight:600">Move to</h2>
+    <a class="list-item" href="#s3"><svg class="i" aria-hidden="true"><use href="#archive"/></svg><div class="t"><b>Archive</b></div></a>
+    <a class="list-item" href="#s3"><svg class="i" aria-hidden="true"><use href="#spam"/></svg><div class="t"><b>Spam</b></div></a>
+    <a class="list-item" href="#s3"><svg class="i" aria-hidden="true"><use href="#folder"/></svg><div class="t"><b>Invoices</b></div><svg class="i sm" aria-hidden="true" style="color:var(--accent)"><use href="#check"/></svg></a>
+    <a class="list-item" href="#s3"><svg class="i" aria-hidden="true"><use href="#folder"/></svg><div class="t"><b>Hiring</b></div></a>
+  </div>
+</div>
+</figure>
+
+<!-- 13 Empty + session expired -->
+<figure>
+<figcaption><b>13</b>Session expired</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div class="center" style="text-align:center;align-items:center">
+    <div class="mark" style="background:var(--surface-2);color:var(--text-2)"><svg class="i" style="width:30px;height:30px" aria-hidden="true"><use href="#lock"/></svg></div>
+    <h2 style="font-size:22px">Your Access session ended</h2>
+    <p>Sign in again to keep reading mail. Drafts on this device are kept.</p>
+    <button class="btn primary block" style="margin-top:8px">Sign in again</button>
+  </div>
+  <div class="safe-bottom"></div>
+</div>
+</figure>
+
+<!-- 14 Empty inbox -->
+<figure>
+<figcaption><b>14</b>Empty folder</figcaption>
+<div class="phone">
+  <div class="safe-top"></div>
+  <div class="appbar">
+    <button class="icon-btn" aria-label="Folders"><svg class="i" aria-hidden="true"><use href="#menu"/></svg></button>
+    <div class="title"><strong>Inbox</strong><span>gupta@akxr.in</span></div>
+  </div>
+  <div class="center" style="text-align:center;align-items:center">
+    <svg class="i" style="width:48px;height:48px;color:var(--text-3)" aria-hidden="true"><use href="#inbox"/></svg>
+    <h2 style="font-size:20px">No mail yet</h2>
+    <p>Send a test email to <span class="mono">gupta@akxr.in</span>. It shows up here within a minute.</p>
+  </div>
+  <nav class="tabs">
+    <a class="on" href="#s3"><svg class="i" aria-hidden="true"><use href="#inbox"/></svg>Mail</a>
+    <a href="#s7"><svg class="i" aria-hidden="true"><use href="#search"/></svg>Search</a>
+    <a href="#s8"><svg class="i" aria-hidden="true"><use href="#spark"/></svg>Agent</a>
+    <a href="#s9"><svg class="i" aria-hidden="true"><use href="#gear"/></svg>Settings</a>
+  </nav>
+  <div class="safe-bottom" style="height:20px"></div>
+</div>
+</figure>
+
+<!-- 15 Push -->
+<figure>
+<figcaption><b>15</b>Push notification</figcaption>
+<div class="phone lock">
+  <div class="safe-top"></div>
+  <div class="clock">9:41</div>
+  <div class="date">Tuesday, 13 October</div>
+  <div class="notif">
+    <div class="mark"><svg class="i sm" aria-hidden="true"><use href="#mail"/></svg></div>
+    <div style="flex:1;min-width:0">
+      <div class="app"><span>AGENTIC INBOX · aman@akxr.in</span><span>now</span></div>
+      <b>Priya Raman</b>
+      <div class="s">Re: Q4 vendor contract</div>
+    </div>
+  </div>
+  <div class="notif" style="margin-top:10px">
+    <div class="mark" style="background:var(--agent)"><svg class="i sm" aria-hidden="true"><use href="#spark"/></svg></div>
+    <div style="flex:1;min-width:0">
+      <div class="app"><span>AGENTIC INBOX · aman@akxr.in</span><span>now</span></div>
+      <b>Draft ready</b>
+      <div class="s">Reply to Priya Raman is ready for review</div>
+    </div>
+  </div>
+</div>
+</figure>
+
+</div>
+</div>
+</body>
+</html>
